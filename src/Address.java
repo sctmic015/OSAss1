@@ -107,6 +107,7 @@ public class Address {
         return outBits;
     }
 
+    // Got code somewhere on the internet
     public String bitset2Hex() {
         BitSet bitset = map();
         final int minLength = 16;
@@ -124,27 +125,5 @@ public class Address {
             result.append("00");
         }
         return result.toString();
-    }
-
-    public String byteToHex(byte num) {
-        char[] hexDigits = new char[2];
-        hexDigits[0] = Character.forDigit((num >> 4) & 0xF, 16);
-        hexDigits[1] = Character.forDigit((num & 0xF), 16);
-        return new String(hexDigits);
-    }
-
-    // Last thing to get working
-    public void encodeHexString() {
-        BitSet outBytes = map();
-        //outBytes = outBytes.get(0, 64);
-        //System.out.println(outBytes.length());
-        //System.out.println(bits.length());
-        byte[] byteArray = bits.toByteArray();
-        StringBuffer hexStringBuffer = new StringBuffer();
-        for (int i = 0; i < byteArray.length; i++) {
-            hexStringBuffer.append(byteToHex(byteArray[i]));
-        }
-        System.out.println();
-        System.out.println(hexStringBuffer.toString());
     }
 }

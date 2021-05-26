@@ -1,3 +1,7 @@
+/** Address class for creating address objects containing the virtual address to physical address mapping
+ * @author SCTMIC015
+ */
+
 import java.util.BitSet;
 
 public class Address {
@@ -13,6 +17,9 @@ public class Address {
         //this.mapping = new int[]{2, 4, 1, 7, 3, 5, 6};
     }
 
+    /**
+     * Prints the binary representation of the address object
+     */
     public void printBits(){
         for (int i = 0; i < bits.length(); i ++){
             if (bits.get(i)){
@@ -23,6 +30,10 @@ public class Address {
         }
     }
 
+    /**
+     * Prints bits of a bitSet object
+     * @param outBits
+     */
     public void printOutBits(BitSet outBits){
         for (int i = 0; i < bits.length(); i ++){
             if (outBits.get(i)){
@@ -33,7 +44,10 @@ public class Address {
         }
     }
 
-    // Think working \
+    /**
+     * Converts the binary representation of the objects address number to an integer
+     * @return int
+     */
     public int bitToInt() {
         int sum = 0;
         int count = 0;
@@ -46,7 +60,11 @@ public class Address {
         return sum;
     }
 
-    // No work yet
+    /**
+     * Converts an integer to a String of its binary representation
+     * @param num
+     * @return
+     */
     public String intToBitString(int num){
         StringBuffer str = new StringBuffer();
         int rem = 0;
@@ -75,9 +93,15 @@ public class Address {
         return reverseStr;
     }
 
-    // No work yet
+    /**
+     * Maps the virtual address of the Address object to the corresponding physical address
+     * @return BitSet
+     */
     public BitSet map(){
         int virtualInt = bitToInt();
+        if (virtualInt < 0 || virtualInt > 6){
+            throw new ArrayIndexOutOfBoundsException("Array Index Out of bounds");
+        }
         int physicalInt = mapping[virtualInt];
         //System.out.println(physicalInt);
         //System.out.println(intToBitString(physicalInt));
@@ -107,7 +131,11 @@ public class Address {
         return outBits;
     }
 
-    // Got code somewhere on the internet
+    /**
+     * Converts a bitSet to its hexadecimal representation.
+     * @author http://www.java2s.com/example/java/java.util/convert-a-bitset-object-to-a-hexadecimal-string-as-required-by-iso858.html
+     * @return String
+     */
     public String bitset2Hex() {
         BitSet bitset = map();
         final int minLength = 16;

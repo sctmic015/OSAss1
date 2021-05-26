@@ -1,4 +1,6 @@
-
+/** Main class for reading bytes from a file, loading them into an array of bitSet objects and finally creating an array of address objects
+ * @author SCTMIC015
+ */
 
 import java.io.*;
 import java.util.Arrays;
@@ -12,9 +14,9 @@ public class Test {
 
         byte[] bytes = getByte(inputFile); // Read input file to bytes
         BitSet bits = new BitSet(512);
-        bits = BitSet.valueOf(bytes); // convert bytes to bitset
+        bits = BitSet.valueOf(bytes); // convert bytes to bitSet
 
-        // Create array of smaller bitsets for each address.
+        // Create an array of smaller bitSets for each address (addressBitsArray).
         int length = bytes.length / 8;
         BitSet[] addressBitsArray = new BitSet[length];
         for (int i = 0; i < length; i ++) {
@@ -31,7 +33,7 @@ public class Test {
         }
 
 
-        // Reverse all the bits in each bitset in the bitset array created above
+        // Reverse all the bits in each bitSet in the addressBitsArray
         for (int i = 0; i < length; i ++) {
             BitSet temp = addressBitsArray[i];
             addressBitsArray[i] = new BitSet(64);    // possibly poor coding
@@ -59,7 +61,7 @@ public class Test {
         }
         **/
 
-        // Create an array of Address objects using the bitsets in the array above
+        // Create an array of Address objects using the bitSets in addressBitsArray
         Address[] addresses = new Address[addressBitsArray.length];
         for (int i = 0;i < addressBitsArray.length; i ++){
             Address address = new Address(addressBitsArray[i]);
@@ -76,7 +78,13 @@ public class Test {
         buffer.close();
     }
 
-
+    /**
+     * Method to get byte array from the input file
+     * @param inputFile
+     * @return Byte[]
+     * @throws IOException
+     * @throws FileNotFoundException
+     */
     public static byte[] getByte(String inputFile) throws IOException, FileNotFoundException {
         byte[] buffer = new byte[1];
         InputStream inputStream = new FileInputStream(inputFile);
